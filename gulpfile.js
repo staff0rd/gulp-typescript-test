@@ -7,7 +7,7 @@ gulp.task('reload', function(){
     .pipe(connect.reload());
 });
 
-gulp.task('connect', function () {
+gulp.task('connect', ['compile'], function () {
   connect.server({
     root: [__dirname + '/src'],
     port: 9000,
@@ -21,7 +21,7 @@ gulp.task('watch', ['compile'], function () {
 });
 
 gulp.task('compile', function(){
-   gulp.src('./src/**/*.ts')
+   return gulp.src('./src/**/*.ts')
      .pipe(typescript({out: 'compiled.js'}))
      .pipe(gulp.dest('./src'))
 });
